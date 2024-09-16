@@ -4,14 +4,17 @@ export const useCounter = (initialValue = 0) => {
 
     const [counter, setCounter] = useState(initialValue)
 
-    const increment = () => {
-        setCounter(counter + 1)
+    const increment = (value = 1) => {
+        setCounter(counter + value)
     }
     const reset = () => {
         setCounter(initialValue)
     }
-    const decrement = () => {
-        setCounter(counter - 1)
+    const decrement = (value = 1, allowNegatives = true) => {
+        if (!allowNegatives && counter < 1) {
+            return
+        }
+        setCounter(counter - value)
     }    
     
   return {

@@ -10,7 +10,7 @@ export const CounterApp = () => {
         <h4>{counter}</h4>
         <button className="btn btn-outline-secondary" onClick={() => increment()}>+</button>
         <button className="btn btn-outline-danger" onClick={() => reset()}>Reset</button>
-        <button className="btn btn-outline-secondary" onClick={() => decrement()}>- </button>
+        <button className="btn btn-outline-secondary" onClick={() => decrement(1, false)}>- </button>
 
     </>
   )
