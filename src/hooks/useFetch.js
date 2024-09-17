@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { useEffect  } from "react"
 
-export const useFetch = (url) => {
+export const useFetch = () => {
 
     const [state, setState] = useState({
         data: null,
@@ -11,10 +10,19 @@ export const useFetch = (url) => {
 
     const {data, isLoading, error} = state
 
-    const getFetch = async () => {
+    const fetchData = async (url, method, bodyData=null ) => {
         if (!url) return
         try{
-            const res = await fetch(url)
+            const options = {
+                method: method,
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+                body: method=='GET' || method=='DELETE'? null : JSON.stringify(bodyData)
+            }
+
+
+            const res = await fetch(url, options)
             const data = await res.json()
             setState({
                 data,
@@ -31,13 +39,10 @@ export const useFetch = (url) => {
         }
     }
 
-    useEffect(() => { 
-      getFetch()
-    }, [url])
-
   return {
     data,
     isLoading,
-    error
+    error,
+    fetchData
   }
 }

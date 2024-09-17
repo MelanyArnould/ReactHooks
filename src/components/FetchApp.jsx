@@ -1,9 +1,14 @@
+import { useEffect } from "react"
 import { useFetch } from "../hooks/useFetch"
 export const FetchApp = () => {
 
   const url = 'https://jsonplaceholder.typicode.com/users'
-  const {data, isLoading, error} = useFetch(url)
+  const {data, isLoading, error, fetchData } = useFetch()
 
+  useEffect(() => {
+    fetchData(url, 'GET')
+  }, [])
+  
 
   return (
     <>
@@ -26,7 +31,7 @@ export const FetchApp = () => {
           {
           data.map(user => {
             return (
-              <tr>
+              <tr key={user.id}>
               <th scope="row">{user.id}</th>
               <td>{user.name}</td>
               <td>{user.email}</td>
