@@ -1,14 +1,19 @@
 import { useFetch } from "../hooks/useFetch"
 export const FetchApp = () => {
 
+  const url = 'https://jsonplaceholder.typicode.com/users'
   const {data, isLoading, error} = useFetch(url)
 
 
   return (
     <>
         <h2>Lista de Usuarios:</h2>
-        {isLoading ? <h4>Cargando...</h4> : error ? <h4>Ha ocurrido un error</h4> :
-        <table class="table">
+        {isLoading 
+        ? <h4>Cargando...</h4> 
+        : error 
+        ? <h4>Ha ocurrido  un error: {error}</h4> 
+        :
+        <table className="table">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -18,12 +23,19 @@ export const FetchApp = () => {
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <th scope="row">id</th>
-            <td>name</td>
-            <td>email</td>
-            <td>website</td>
-            </tr>
+          {
+          data.map(user => {
+            return (
+              <tr>
+              <th scope="row">{user.id}</th>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.website}</td>
+              </tr>
+            )
+          })
+          }
+            
         </tbody>
         </table> }
     </>

@@ -1,10 +1,11 @@
 import { useState } from "react"
+import { useEffect  } from "react"
 
 export const useFetch = (url) => {
 
     const [state, setState] = useState({
         data: null,
-        isLoading: false,
+        isLoading: true,
         error: null 
     })
 
@@ -33,8 +34,6 @@ export const useFetch = (url) => {
     useEffect(() => { 
       getFetch()
     }, [url])
-    
-
 
   return {
     data,
